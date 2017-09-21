@@ -1,9 +1,10 @@
 var express = require('express');
 var app = express();
-const files = require('./app/controller/filescontroller.js');
 
-app.get('', function(req, res){
-  res.send(files.read());
+app.use(express.static('./app'));
+app.get('*', function(request, response) {
+  console.log('New request:', request.url);
+  response.sendFile('index.html', { root: './app' });
 });
 
 app.listen('3000');
